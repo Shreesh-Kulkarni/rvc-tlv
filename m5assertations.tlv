@@ -12,8 +12,8 @@
    m5_makerchip_module   // (Expanded in Nav-TLV pane.)
 \TLV c_ext_decode($_inputinstr)
    $is_compressed = ($_inputinstr == 16'bx);
-   $more_to_do = $valid_decode && 1'b0 && $is_compressed;
-   $more_to_do_pc[31:2] = 30'b0;
+   $more_to_do = $valid_decode && 1'b0 && $is_compressed && !($more_to_do_pc[1] == 1'b1);
+   $more_to_do_pc[31:2] = $reset ? 30'b0 : >>1$more_to_do_pc + 2'b10;
    $c_instr[15:0] = $more_to_do ? $_inputinstr : >>1$c_instr;
    $instr[31:0] = $more_to_do ? (
                 ( $c_instr[15:0] ==? 16'b0001xxxxxxxxxx00 ) ? {2'b0, {$c_instr[10:7], $c_instr[12:11], $c_instr[5] , $c_instr[6] ,2'b0}, 5'b00010 , 3'b000  , {2'b01, $c_instr[4:2]}, 5'b00100     , 2'b11} :  //CADDI4SPN0 
