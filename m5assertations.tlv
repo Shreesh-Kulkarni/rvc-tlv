@@ -60,7 +60,7 @@
                 ( $c_instr[15:0] ==? 16'b1001xxxxxxx1xx10 ) ? {7'b0000000, {$c_instr[6:2]}, {$c_instr[11:7]}, 3'b000, $c_instr[11:7], 5'b01100, 2'b11} :  //CADD2 
                 ( $c_instr[15:0] ==? 16'b1001xxxxxxxx1x10 ) ? {7'b0000000, {$c_instr[6:2]}, {$c_instr[11:7]}, 3'b000, $c_instr[11:7], 5'b01100, 2'b11} :  //CADD3 
                 ( $c_instr[15:0] ==? 16'b1001xxxxxxxxx110 ) ? {7'b0000000, {$c_instr[6:2]}, {$c_instr[11:7]}, 3'b000, $c_instr[11:7], 5'b01100, 2'b11} :  //CADD4 
-               32'bx) : $c_instr[31:0] ;
+               32'bx) : $_inputinstr[31:0] ;
    
 \TLV
    $reset = *reset;
